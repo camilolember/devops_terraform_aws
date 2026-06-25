@@ -9,6 +9,9 @@ on:
     branches:
       - main
 
+env:
+  REACT_APP_API_URL: "http://localhost:3000"
+
 jobs:
   install:
     runs-on: ubuntu-latest
@@ -28,7 +31,7 @@ jobs:
         uses: actions/cache/save@v3
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('package-lock.json') }}
+          key: node-modules-${{ hashFiles('package-lock.json', 'package.json') }}
 
   lint:
     needs: [install]
@@ -46,7 +49,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('package-lock.json') }}
+          key: node-modules-${{ hashFiles('package-lock.json', 'package.json') }}
 
       - name: Run linter
         run: npm run lint
@@ -70,7 +73,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: node_modules
-          key: node-modules-${{ hashFiles('package-lock.json') }}
+          key: node-modules-${{ hashFiles('package-lock.json', 'package.json') }}
 
       - name: Run tests
         env:
@@ -93,7 +96,7 @@ jobs:
         uses: actions/cache/restore@v3
         with:
           path: node_modules
-          key: deps-${{ hashFiles('package-lock.json') }}
+          key: deps-${{ hashFiles('package-lock.json', 'package.json') }}
 
       - name: Build project
         run: npm run build
