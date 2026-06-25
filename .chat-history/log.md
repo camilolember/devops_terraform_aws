@@ -33,3 +33,15 @@
 - user_prompt: "now lint failed with:\n\nRun npm run lint\n\n> rdicidr@0.1.0 lint\n> eslint ./src/\n\nsh: 1: eslint: not found\nnpm ERR! code 127\nnpm ERR! path /home/runner/work/devops_terraform_aws/devops_terraform_aws\nnpm ERR! command failed\nnpm ERR! command sh -c eslint ./src/\n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     /home/runner/.npm/_logs/2026-06-25T17_34_30_195Z-debug.log\nError: Process completed with exit code 127."
 - assistant_response_summary: "Modified package.json to explicitly include `eslint` in the dependencies. This resolves the `eslint: not found` error which occurred because ESLint was not installed directly after adding the prettier plugins."
 - files_affected: "package.json, .chat-history/log.md"
+
+---
+- timestamp: "2026-06-25T12:40:46-05:00"
+- user_prompt: "The tests failed with this error:\n\nRun npm run test\n\n> rdicidr@0.1.0 test\n> react-scripts test\n\nsh: 1: react-scripts: not found\nnpm ERR! code 127\nnpm ERR! path /home/runner/work/devops_terraform_aws/devops_terraform_aws\nnpm ERR! command failed\nnpm ERR! command sh -c react-scripts test\n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     /home/runner/.npm/_logs/2026-06-25T17_34_24_830Z-debug.log\nError: Process completed with exit code 127."
+- assistant_response_summary: "Refactored `.github/workflows/ci.yaml` to run `npm install` in every job and use `actions/setup-node`'s built-in `cache: 'npm'` feature, instead of manually saving/restoring `node_modules` across jobs. This resolves cross-job symlink issues where `.bin` executables like `react-scripts` get lost."
+- files_affected: ".github/workflows/ci.yaml, .chat-history/log.md"
+
+---
+- timestamp: "2026-06-25T12:44:50-05:00"
+- user_prompt: "the 'test' job failed but it is still 'running' how can I cancel it?"
+- assistant_response_summary: "Explained how to cancel a hanging GitHub Actions job via the UI and updated package.json to append `--watchAll=false` to the test script, preventing react-scripts from hanging in watch mode during CI."
+- files_affected: "package.json, .chat-history/log.md"
