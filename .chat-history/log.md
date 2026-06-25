@@ -50,4 +50,11 @@
 - timestamp: "2026-06-25T12:50:24-05:00"
 - user_prompt: "it fails again with:\n\nRun npm run test\n\n> rdicidr@0.1.0 test\n> react-scripts test --watchAll=false\n\nsh: 1: react-scripts: not found\nnpm ERR! code 127\nnpm ERR! path /home/runner/work/devops_terraform_aws/devops_terraform_aws\nnpm ERR! command failed\nnpm ERR! command sh -c react-scripts test --watchAll=false\n\nnpm ERR! A complete log of this run can be found in:\nnpm ERR!     /home/runner/.npm/_logs/2026-06-25T17_49_21_746Z-debug.log\nError: Process completed with exit code 127."
 - assistant_response_summary: "Clarified to the user that this error occurred because they had pushed the `package.json` fix but not the `ci.yaml` pipeline rewrite yet. Now that the `ci.yaml` cache rewrite has been pushed, the subsequent pipeline run will have `react-scripts` correctly installed."
-- files_affected: ".chat-history/log.md"
+- files_affected: ".github/workflows/ci.yaml"
+
+---
+- timestamp: "2026-06-25T12:53:59-05:00"
+- user_prompt: "How can I trigger the pipeline manually?"
+- assistant_response_summary: "Added `workflow_dispatch` trigger to ci.yaml `on:` block. Explained two ways to trigger manually: GitHub UI (Actions tab → Run workflow button) and GitHub CLI (`gh workflow run ci.yaml --ref <branch>`)."
+- files_affected: ".github/workflows/ci.yaml"
+
