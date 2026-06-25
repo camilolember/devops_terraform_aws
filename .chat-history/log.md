@@ -58,3 +58,10 @@
 - assistant_response_summary: "Added `workflow_dispatch` trigger to ci.yaml `on:` block. Explained two ways to trigger manually: GitHub UI (Actions tab → Run workflow button) and GitHub CLI (`gh workflow run ci.yaml --ref <branch>`)."
 - files_affected: ".github/workflows/ci.yaml"
 
+---
+- timestamp: "2026-06-25T12:57:09-05:00"
+- user_prompt: "it failed this time with this log: ~/Downloads/logs_76077668583"
+- assistant_response_summary: "Diagnosed lint failure: `TypeError: prettier.resolveConfig.sync is not a function` caused by Prettier v3 (3.3.1) being incompatible with eslint-plugin-prettier@3.x which requires Prettier v2. Fixed by pinning `prettier` to `^2.8.8` in package.json. Tests passed (11/11). Build job was skipped due to lint failure."
+- files_affected: "package.json"
+
+
